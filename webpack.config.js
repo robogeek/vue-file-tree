@@ -1,4 +1,5 @@
 const path = require('path');
+const BabiliWebpackPlugin = require('babili-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
@@ -85,6 +86,7 @@ module.exports = {
   },
 
   plugins: [
+    // new BabiliWebpackPlugin(),
     new CopyWebpackPlugin([
       { from: 'src/*.css', to: '[name].css'},
       { from: 'src/*.d.ts', to: '[name].ts'}
