@@ -68,8 +68,8 @@ export default {
             console.log('external drop', cursorPosition, util.inspect(event));
         },
         addPathToTree(fn, stat, isDir) {
-            console.log(`FileBrowserTree addPathToTree ${fn} ${util.inspect(stat)} ${isDir}`);
-            console.log(`addPathToTree ${fn}`);
+            console.log(`addPathToTree ${fn} ${util.inspect(stat)} ${isDir}`);
+            console.log(`addPathToTree ${util.inspect(process)}`);
             console.log(util.inspect(_path));
             fn = _path.normalize(fn);
             console.log(`addPathToTree NORMALIZED ${fn}`);
