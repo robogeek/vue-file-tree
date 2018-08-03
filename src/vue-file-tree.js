@@ -1,7 +1,7 @@
 
-import Vue from 'vue';
+// import Vue from 'vue';
 
-import _path from 'path';
+import path from 'path';
 import util from 'util';
 import pd from 'path-directories';
 
@@ -19,7 +19,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 library.add(faJs, faVuejs, faCaretRight, faCaretDown, faTable, faImage, faFile, faCircle, faCode);
 
-Vue.component('font-awesome-icon', FontAwesomeIcon);
+// Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 
 // TODO: Prevent dragging a file into a place where there's already one of the same name
@@ -41,7 +41,8 @@ export default {
         }
     },
     components: {
-        slVueTree
+        slVueTree,
+        'font-awesome-icon': FontAwesomeIcon
     },
     methods: {
         nodeClick(node) {
@@ -70,10 +71,10 @@ export default {
         addPathToTree(fn, stat, isDir) {
             console.log(`addPathToTree ${fn} ${util.inspect(stat)} ${isDir}`);
             console.log(`addPathToTree ${util.inspect(process)}`);
-            console.log(util.inspect(_path));
-            fn = _path.normalize(fn);
+            console.log(util.inspect(path));
+            fn = path.normalize(fn);
             console.log(`addPathToTree NORMALIZED ${fn}`);
-            const basenm = _path.basename(fn);
+            const basenm = path.basename(fn);
             console.log(`addPathToTree BASENAME ${basenm}`);
             const dirs = pd(fn);
             console.log(`addPathToTree dirs ${util.inspect(dirs)}`);

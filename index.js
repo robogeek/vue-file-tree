@@ -1,23 +1,33 @@
 
 // import Vue from 'vue';
 
-import path from 'path';
-import util from 'util';
-import pd from 'path-directories';
+const Vue = require('vue');
 
-import mime from 'mime';
+const path = require('path');
+const util = require('util');
+const pd = require('path-directories');
 
-import slVueTree from 'sl-vue-tree';
-import 'sl-vue-tree/dist/sl-vue-tree-dark.css';
+const mime = require('mime');
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-  faCaretRight, faCaretDown, faTable, faImage, faFile, faCircle, faCode
-} from '@fortawesome/free-solid-svg-icons';
-import { faJs, faVuejs } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+const slVueTree = require('sl-vue-tree');
+// import 'sl-vue-tree/dist/sl-vue-tree-dark.css';
 
-// Vue.component('font-awesome-icon', FontAwesomeIcon);
+const library = require('@fortawesome/fontawesome-svg-core').library;
+const faCaretRight = require('@fortawesome/free-solid-svg-icons/faCaretRight');
+const faCaretDown = require('@fortawesome/free-solid-svg-icons/faCaretDown');
+const faTable = require('@fortawesome/free-solid-svg-icons/faTable');
+const faImage = require('@fortawesome/free-solid-svg-icons/faImage');
+const faFile = require('@fortawesome/free-solid-svg-icons/faFile');
+const faCircle = require('@fortawesome/free-solid-svg-icons/faCircle');
+const faCode = require('@fortawesome/free-solid-svg-icons/faCode');
+const faJs = require('@fortawesome/free-brands-svg-icons/faJs');
+const faVuejs = require('@fortawesome/free-brands-svg-icons/faVuejs');
+const FontAwesomeIcon = require('@fortawesome/vue-fontawesome').FontAwesomeIcon;
+
+library.add(faJs, faVuejs, faCaretRight, faCaretDown, faTable, 
+    faImage, faFile, faCircle, faCode);
+
+Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 
 // TODO: Prevent dragging a file into a place where there's already one of the same name
@@ -31,7 +41,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 // TODO: move to own project -- publish as npm package
 
-export default {
+module.exports = {
 
     data() {
         return {
@@ -40,7 +50,7 @@ export default {
     },
     components: {
         slVueTree,
-        'font-awesome-icon': FontAwesomeIcon
+        // 'font-awesome-icon': FontAwesomeIcon
     },
     methods: {
         nodeClick(node) {
@@ -123,8 +133,6 @@ export default {
         }
     },
     created: function() {
-        library.add(faJs, faVuejs, faCaretRight, faCaretDown, faTable, 
-                faImage, faFile, faCircle, faCode);
     },
     template: `
     <sl-vue-tree

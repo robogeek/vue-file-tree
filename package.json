@@ -2,7 +2,7 @@
   "name": "vue-file-tree",
   "version": "0.1.0",
   "description": "File system tree component for Vue.js applications",
-  "main": "index.js",
+  "main": "dist/vue-file-tree.js",
   "scripts": {
     "clear": "rm -rf dist",
     "build": "clear && webpack-cli --progress --mode production",
