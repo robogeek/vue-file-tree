@@ -72,7 +72,9 @@ export default {
             console.log(`addPathToTree ${fn}`);
             console.log(util.inspect(_path));
             fn = _path.normalize(fn);
+            console.log(`addPathToTree NORMALIZED ${fn}`);
             const basenm = _path.basename(fn);
+            console.log(`addPathToTree BASENAME ${basenm}`);
             const dirs = pd(fn);
             console.log(`addPathToTree dirs ${util.inspect(dirs)}`);
             let curnodes = this.nodes;
