@@ -64,7 +64,7 @@ const mime = require('mime');
 
 import slVueTree from 'sl-vue-tree';
 import 'sl-vue-tree/dist/sl-vue-tree-dark.css';
-Vue.component('sl-vue-tree', slVueTree);
+// Vue.component('sl-vue-tree', slVueTree);
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -95,6 +95,9 @@ export default {
         return {
             nodes: []
         }
+    },
+    components: {
+        slVueTree
     },
     methods: {
         nodeClick(node) {
