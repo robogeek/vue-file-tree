@@ -1,7 +1,7 @@
 
 import Vue from 'vue';
 
-import path from 'path';
+import _path from 'path';
 import util from 'util';
 import pd from 'path-directories';
 
@@ -70,8 +70,9 @@ export default {
         addPathToTree(fn, stat, isDir) {
             console.log(`FileBrowserTree addPathToTree ${fn} ${util.inspect(stat)} ${isDir}`);
             console.log(`addPathToTree ${fn}`);
-            fn = path.normalize(fn);
-            const basenm = path.basename(fn);
+            console.log(util.inspect(_path));
+            fn = _path.normalize(fn);
+            const basenm = _path.basename(fn);
             const dirs = pd(fn);
             console.log(`addPathToTree dirs ${util.inspect(dirs)}`);
             let curnodes = this.nodes;
