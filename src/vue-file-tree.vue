@@ -57,14 +57,13 @@
 import Vue from 'vue';
 
 const pd = require('path-directories');
-const path = require('path');
-const util = require('util');
+import path from 'path';
+import util from 'util';
 
 const mime = require('mime');
 
 import slVueTree from 'sl-vue-tree';
 import 'sl-vue-tree/dist/sl-vue-tree-dark.css';
-// Vue.component('sl-vue-tree', slVueTree);
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
