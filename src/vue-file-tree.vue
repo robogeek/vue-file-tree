@@ -56,11 +56,11 @@
 
 import Vue from 'vue';
 
-const pd = require('path-directories');
+import pd from 'path-directories';
 import path from 'path';
 import util from 'util';
 
-const mime = require('mime');
+import mime from 'mime';
 
 import slVueTree from 'sl-vue-tree';
 import 'sl-vue-tree/dist/sl-vue-tree-dark.css';
