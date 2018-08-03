@@ -98,6 +98,7 @@ export default {
                             stat 
                         }
                     };
+                    console.log(`addPathToTree !found push newnode ${util.inspect(newnode)}`);
                     curnodes.push(newnode);
                     curnodes = newnode.children;
                 } else {
@@ -118,6 +119,7 @@ export default {
             if (fn.endsWith('.ejs')) newnode.data.type = "EJS";
             if (fn.endsWith('.vue')) newnode.data.type = "VUEJS";
             if (!newnode.isLeaf) newnode.children = [];
+            console.log(`addPathToTree FINAL push newnode ${util.inspect(newnode)}`);
             curnodes.push(newnode);
         }
     }

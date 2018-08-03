@@ -53,3 +53,9 @@
 </template>
 
 <script src="./vue-file-tree.js"/>
+
+<style scoped>
+#file-tree {
+    height: 100%;
+}
+</style>
