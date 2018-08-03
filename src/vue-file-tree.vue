@@ -56,9 +56,9 @@
 
 import Vue from 'vue';
 
-import pd from 'path-directories';
 import path from 'path';
 import util from 'util';
+import pd from 'path-directories';
 
 import mime from 'mime';
 
