@@ -38,7 +38,8 @@ export default {
 
     data() {
         return {
-            nodes: []
+            nodes: [],
+            contextMenuIsVisible: false
         }
     },
     components: {
