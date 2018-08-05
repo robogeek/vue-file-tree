@@ -1,6 +1,7 @@
 
 const _path = require('path');
 const normalize = require('normalize-path');
+const parsePath = require('parse-filepath');
 
 let isWin32 = false;
 let isPosix = true;
@@ -11,7 +12,7 @@ module.exports = function(path2split) {
     if (path2split.indexOf('\\') >= 0) { isWin32 = true; isPosix = false; }
     let path = isWin32 ? _path.win32 : _path.posix;
     if (!path) path = _path;
-    let parsed = path.parse(path2split);
+    let parsed = path.parse ? path.parse(path2split) : parsePath(path2split);
     if (parsed.root === '') parsed.root = '.';
     let dir = parsed.dir;
     let dirz = [];
