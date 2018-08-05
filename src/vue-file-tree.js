@@ -3,7 +3,8 @@
 
 import path from 'path';
 import util from 'util';
-import pd from 'path-directories';
+// import pd from 'path-directories';
+import splitter from './path-splitdirs';
 
 import mime from 'mime';
 
@@ -41,15 +42,28 @@ export default {
         }
     },
     components: {
-        slVueTree,
+        'sl-vue-tree': slVueTree,
         'font-awesome-icon': FontAwesomeIcon
     },
+    created() {
+        /*
+         * Derived from Buefy's b-dropdown
+         * https://github.com/buefy/buefy/blob/dev/src/components/dropdown/Dropdown.vue
+         */
+        if (typeof window !== 'undefined') {
+            document.addEventListener('click', this.clickedOutside)
+        }
+    },
     methods: {
-        nodeClick(node) {
-            this.$emit('nodeClick', node);
+        nodeClick(node, event) {
+            this.$emit('nodeClick', event, node);
         },
-        nodeDoubleClick(node) {
-            console.log(`nodeDoubleClick ${util.inspect(node)}`);
+        nodeDoubleClick(node, event) {
+            console.log(`nodeDoubleClick ${node.title} ${node.data.type} isLeaf ${node.isLeaf} ${util.inspect(node)}`);
+            if (!node.isLeaf) {
+                this.$refs.slvuetree.onToggleHandler(event, node);
+                return;
+            }
             this.$emit('nodeDoubleClick', node);
         },
         nodeSelect(node) {
@@ -62,9 +76,25 @@ export default {
             console.log(`nodeDrop ${util.inspect(node)}`);
             this.$emit('nodeDrop', node);
         },
-        nodeContextMenu(node) {
+        nodeContextMenu(node, event) {
             console.log(`nodeContextMenu ${util.inspect(node)}`);
+            this.contextMenuIsVisible = true;
+            const $contextMenu = this.$refs.contextmenu;
+            $contextMenu.style.left = event.clientX + 'px';
+            $contextMenu.style.top = event.clientY + 'px';
         },
+        /**
+         * Close dropdown if clicked outside.
+         * Derived from Buefy's b-dropdown
+         * https://github.com/buefy/buefy/blob/dev/src/components/dropdown/Dropdown.vue
+         */
+        clickedOutside(event) {
+            if (!this.isInWhiteList(event.target)) this.contextMenuIsVisible = false;
+        },
+        // If the "clickOutside" is on a target where we should ignore the click
+        // then we should ignore this.  
+        // See: https://github.com/buefy/buefy/blob/dev/src/components/dropdown/Dropdown.vue
+        isInWhiteList(el) { return false; },
         onExternalDropHandler(cursorPosition, event) {
             console.log('external drop', cursorPosition, util.inspect(event));
         },
@@ -76,10 +106,15 @@ export default {
             console.log(`addPathToTree NORMALIZED ${fn}`);
             const basenm = path.basename(fn);
             console.log(`addPathToTree BASENAME ${basenm}`);
-            const dirs = pd(fn);
-            console.log(`addPathToTree dirs ${util.inspect(dirs)}`);
+
+            // NEED TO REWRITE FOR path-splitdirs
+
+            const split = splitter(fn);
+
+            // const dirs = pd(fn);
+            console.log(`addPathToTree dirs ${util.inspect(split)}`);
             let curnodes = this.nodes;
-            for (let dir of dirs) {
+            for (let dir of split.dirz) {
                 if (dir === '.') continue;
                 let found = undefined;
                 for (let cur of curnodes) {

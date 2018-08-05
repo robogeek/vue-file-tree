@@ -1,4 +1,5 @@
 <template>
+    <span>
     <sl-vue-tree
            id="file-tree"
            :value="nodes"
@@ -50,6 +51,16 @@
                 v-if="node.data.isModified"></font-awesome-icon>
       </template>
     </sl-vue-tree>
+
+
+    <aside class="menu contextmenu" 
+            ref="contextmenu" 
+            v-show="contextMenuIsVisible">
+        <slot name="context-menu"></slot>
+    </aside>
+
+
+    </span>
 </template>
 
 <script src="./vue-file-tree.js"/>
