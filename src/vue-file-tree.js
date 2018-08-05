@@ -115,7 +115,7 @@ export default {
             // const dirs = pd(fn);
             console.log(`addPathToTree dirs ${util.inspect(split)}`);
             let curnodes = this.nodes;
-            for (let dir of split.dirz) {
+            for (let dir of split.dirs) {
                 if (dir === '.') continue;
                 let found = undefined;
                 for (let cur of curnodes) {
