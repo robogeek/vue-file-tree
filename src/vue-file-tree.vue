@@ -93,6 +93,18 @@ library.add(faJs, faVuejs, faCaretRight, faCaretDown, faTable, faImage, faFile, 
 
 // TODO: move to own project -- publish as npm package
 
+/* var nodes = [
+    {title: 'Item1', isLeaf: true},
+    {title: 'Item2', isLeaf: true, data: { visible: false }},
+    {title: 'Folder1'},
+    {
+      title: 'Folder2', isExpanded: true, children: [
+        {title: 'Item3', isLeaf: true},
+        {title: 'Item4', isLeaf: true, data: { isModified: true }}
+      ]
+    }
+]; */
+
 export default {
 
     data() {
