@@ -2,6 +2,7 @@
     <span>
     <sl-vue-tree
            id="file-tree"
+           ref="slvuetree"
            :value="nodes"
            :allowMultiselect="false"
            @nodeclick="nodeClick"
