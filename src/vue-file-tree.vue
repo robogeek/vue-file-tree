@@ -1,78 +1,72 @@
 <template>
     <span>
     <sl-vue-tree
-           id="file-tree"
-           ref="slvuetree"
-           :value="nodes"
-           :allowMultiselect="false"
-           @nodeclick="nodeClick"
-           @nodedblclick="nodeDoubleClick"
-           @select="nodeSelect"
-           @toggle="nodeToggle"
-           @drop="nodeDrop"
-           @nodecontextmenu="nodeContextMenu"
-           @externaldrop.prevent="onExternalDropHandler">
+            id="vue-file-tree"
+            ref="slvuetree"
+            :value="nodes"
+            :allowMultiselect="false"
+            @nodeclick="nodeClick"
+            @nodedblclick="nodeDoubleClick"
+            @select="nodeSelect"
+            @toggle="nodeToggle"
+            @drop="nodeDrop"
+            @nodecontextmenu="nodeContextMenu"
+            @externaldrop.prevent="onExternalDropHandler">
 
-      <template slot="toggle" slot-scope="{ node }">
-          <span v-if="!node.isLeaf">
-            <font-awesome-icon 
-                icon="caret-right" 
-                v-if="!node.isExpanded"></font-awesome-icon>
-            <font-awesome-icon 
-                icon="caret-down"
-                v-else-if="node.isExpanded"></font-awesome-icon>
-          </span>
-      </template>
+        <template slot="toggle" slot-scope="{ node }">
+            <span v-if="!node.isLeaf">
+                <font-awesome-icon 
+                    icon="caret-right" 
+                    v-if="!node.isExpanded"></font-awesome-icon>
+                <font-awesome-icon 
+                    icon="caret-down"
+                    v-else-if="node.isExpanded"></font-awesome-icon>
+            </span>
+        </template>
 
-      <template slot="title" slot-scope="{ node }">
-          <font-awesome-icon 
+        <template slot="title" slot-scope="{ node }">
+            <font-awesome-icon 
                 :icon="[ 'fab', 'js' ]" 
                 v-if='node.data.type === "application/javascript"'></font-awesome-icon>
-          <font-awesome-icon 
+            <font-awesome-icon 
                 icon="table" 
                 v-else-if='node.data.type === "application/json"'></font-awesome-icon>
-          <font-awesome-icon 
+            <font-awesome-icon 
                 icon="image" 
                 v-else-if='node.data.type === "IMAGE"'></font-awesome-icon>
-          <font-awesome-icon 
+            <font-awesome-icon 
                 icon="code" 
                 v-else-if='node.data.type === "EJS"'></font-awesome-icon>
-          <font-awesome-icon 
+            <font-awesome-icon 
                 :icon="[ 'fab', 'vuejs' ]" 
                 v-else-if='node.data.type === "VUEJS"'></font-awesome-icon>
-          <font-awesome-icon 
+            <font-awesome-icon 
                 icon="file" 
                 v-else-if="node.isLeaf"></font-awesome-icon>
-           {{ node.title }} </template>
+            {{ node.title }} </template>
 
 
-      <template slot="sidebar" slot-scope="{ node }">
-          <font-awesome-icon 
+        <template slot="sidebar" slot-scope="{ node }">
+            <font-awesome-icon 
                 icon="circle" 
                 v-if="node.data.isModified"></font-awesome-icon>
-      </template>
+        </template>
     </sl-vue-tree>
 
 
-    <aside class="menu contextmenu" 
+    <aside class="menu vue-file-tree-contextmenu" 
             ref="contextmenu" 
             v-show="contextMenuIsVisible">
         <slot name="context-menu"></slot>
     </aside>
 
-
     </span>
 </template>
 
-<!-- script src="./vue-file-tree.js"/ -->
-
 <script>
-
-// import Vue from 'vue';
 
 import path from 'path';
 import util from 'util';
-// import pd from 'path-directories';
 import splitter from './path-splitdirs';
 
 import mime from 'mime';
@@ -89,15 +83,11 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 library.add(faJs, faVuejs, faCaretRight, faCaretDown, faTable, faImage, faFile, faCircle, faCode);
 
-// Vue.component('font-awesome-icon', FontAwesomeIcon);
-
 
 // TODO: Prevent dragging a file into a place where there's already one of the same name
 //       In such a case ask the user what to do?  How?
 
 // TODO: Support copy/paste
-
-// TODO: Support right-click menu
 
 // TODO: Support delete
 
@@ -177,11 +167,8 @@ export default {
             const basenm = path.basename(fn);
             console.log(`addPathToTree BASENAME ${basenm}`);
 
-            // NEED TO REWRITE FOR path-splitdirs
-
             const split = splitter(fn);
 
-            // const dirs = pd(fn);
             console.log(`addPathToTree dirs ${util.inspect(split)}`);
             let curnodes = this.nodes;
             for (let dir of split.dirs) {
@@ -235,7 +222,7 @@ export default {
 
 <style>
 
-.contextmenu {
+.vue-file-tree-contextmenu {
     position: absolute;
     background-color: white;
     color: black;
@@ -243,15 +230,15 @@ export default {
     cursor: pointer;
 }
 
-.contextmenu > div {
+.vue-file-tree-contextmenu > div {
     padding: 10px;
 }
 
-.contextmenu > div:hover {
+.vue-file-tree-contextmenu > div:hover {
     background-color: rgba(100, 100, 255, 0.5);
 }
 
-#file-tree {
+#vue-file-tree {
     height: 100%;
 }
 
