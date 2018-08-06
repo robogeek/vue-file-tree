@@ -232,7 +232,7 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
 #file-tree {
     height: 100%;
 }
